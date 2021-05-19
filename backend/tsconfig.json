@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        "outDir": "dist",
+        "target": "ES3",
+        "module": "commonjs",
+
+        "types": [ "jest" ]
+    },
+    "exclude": [
+        "**/*.test.ts",
+        "**/*.test.js"
+    ]
+}

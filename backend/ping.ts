@@ -1,0 +1,1 @@
+import { mcping } from 'mcping-js';
