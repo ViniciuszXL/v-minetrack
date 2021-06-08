@@ -1,6 +1,6 @@
 module.exports = {
     apps : [{
-      name   : "dust-api",
+      name   : "v-minetrack",
       script : "./dist/main.js",
       instances: 0,
       exec_mode: "cluster"
