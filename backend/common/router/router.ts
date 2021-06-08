@@ -34,6 +34,10 @@ export abstract class Router extends EventEmitter {
         };
     }
 
+    renderError(response, next, message, errorCode) {
+        return (document) => this.render(response, next, { message: message, errorCode: errorCode, error: true });
+    }
+
     private parseOptions(options?: RouterOptions) {
         options.success = options.success === undefined ? true : options.success;
         return options;
