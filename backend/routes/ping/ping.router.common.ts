@@ -47,8 +47,8 @@ export abstract class PingRouterCommon extends Router {
             
             // Conexão feita com sucesso e retornou alguns valores //
             .then(result => {
-                // Colocando o resultado em cache por 1 minuto no Redis //
-                this.redis.cache(key, result, 60)
+                // Colocando o resultado em cache por 3 minuto no Redis //
+                this.redis.cache(key, result, 3 * 60)
                 
                 // Cache criado com sucesso, agora retornado o valor para a web //
                 .then(() => this.render(resp, next, { response: result, message: 'Request successfully completed', cache: false }))
