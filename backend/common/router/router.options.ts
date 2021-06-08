@@ -3,10 +3,10 @@ export interface RouterOptions {
     message?: string;
     response?: any;
     queries?: number;
+    cache?: boolean;
     
     // Errors //
     error?: boolean;
-    requestError?: string;
     errorCode?: number;
 
     // Players //

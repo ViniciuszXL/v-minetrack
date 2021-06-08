@@ -13,3 +13,5 @@ class PingRouter extends PingRouterCommon {
     }
 
 }
+
+export const pingRouter = new PingRouter();

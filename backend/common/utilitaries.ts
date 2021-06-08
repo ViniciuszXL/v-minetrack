@@ -5,5 +5,3 @@ class Utilitaries {
     }
 
 }
-
-export const utilitaries = new Utilitaries();

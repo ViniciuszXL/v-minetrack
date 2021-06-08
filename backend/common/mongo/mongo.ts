@@ -16,13 +16,14 @@ export class Mongo {
                     useUnifiedTopology: true,
                     useFindAndModify: true,
                     useCreateIndex: true,
-                    autoReconnect: true,
                     maxPoolSize: 10
                 }
             )
 
             .then(connection => {
                 this.mongoConnection = connection.connection;
+
+                console.log('Successfully connected to Mongo');
                 resolve(this.mongoConnection);
             })
 

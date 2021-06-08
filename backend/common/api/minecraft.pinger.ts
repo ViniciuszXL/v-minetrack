@@ -7,11 +7,11 @@ export class MinecraftPing {
 
     constructor(host: String, port?: Number) {
         this.host = host;
-        this.port = port;
+        this.port = port || 25565;
     }
 
     status(): Promise<any> {
-        return pinger.pingWithPromise(this.host, this.port || 25565).then(this.render());
+        return pinger.pingWithPromise(this.host, this.port).then(this.render());
     }
 
     render() {
