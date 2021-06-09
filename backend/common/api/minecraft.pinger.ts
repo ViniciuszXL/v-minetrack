@@ -14,7 +14,7 @@ export class MinecraftPing {
         return pinger.pingWithPromise(this.host, this.port).then(this.render());
     }
 
-    render() {
+    private render() {
         return (server) => {
             const { version, players, description, favicon, ping } = server;
             const { name, protocol } = version;
