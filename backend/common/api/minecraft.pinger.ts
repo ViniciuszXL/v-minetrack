@@ -22,6 +22,7 @@ export class MinecraftPing {
             
             return {
                 host: this.host,
+                port: this.port,
                 versionName: name,
                 versionProtocol: protocol,
                 onlinePlayers: online,

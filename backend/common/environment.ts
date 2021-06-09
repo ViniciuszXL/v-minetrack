@@ -28,5 +28,13 @@ export const environment = {
         KEY: {
             SERVER_PING_CACHE: '#SERVER_PING_CACHE_'
         }
-    }
+    },
+    TEST: {
+        URL: process.env.TEST_URL || 'http://localhost:8080/api',
+        PING: {
+            MUSH: '/minecraft/ping/mushmc.com.br',
+            FLAME: '/minecraft/ping/flamemc.com.br',
+            HYPIXEL: '/minecraft/ping/mc.hypixel.net'
+        },
+    },
 }

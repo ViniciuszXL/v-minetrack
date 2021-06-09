@@ -11,22 +11,27 @@ import { RedisClient } from '../common/redis/redis';
 
 export class Server {
 
+    // Variáveis //
     application: restify.Server;
     mongo: Mongo = new Mongo();
     redis: RedisClient = new RedisClient();
 
+    // Inicialização do Redis //
     initializeRedis(): Promise<any> {
         return this.redis.startConnection();
     }
 
+    // Inicialização do Mongo //
     initializeMongo(): Promise<any> {
         return this.mongo.startConnection();
     }
 
+    // Inicialização das rotas //
     initRoutes(routers: Router[]): Promise<any> {
         return new Promise((resolve, reject) => {
             try {
 
+                // Criando a aplicação //
                 this.application = restify.createServer({
                     name: environment.APPLICATION.NAME,
                     version: environment.APPLICATION.VERSION
@@ -38,7 +43,10 @@ export class Server {
 
                 // Routes //
                 for (var router of routers) {
+                    // Aplicando o redis às rotas //
                     router.applyRedis(this.redis);
+                    
+                    // Aplicados as rotas à aplicação //
                     router.applyRoutes(this.application);
                 }
 
@@ -50,13 +58,15 @@ export class Server {
         });
     }
 
+    // Inicialização da aplicação //
     bootstrap(routers: Router[] = []): Promise<Server> {
         return this.initializeRedis().then(() => this.initializeMongo().then(() => this.initRoutes(routers).then(() => this)));
         //return this.initRoutes(routers).then(() => this);
     }
 
+    // Desligamento da aplicação //
     shutdown() {
-        return this.mongo.closeConnection().then(() => this.application.close());
+        return this.redis.closeConnection().then(() => this.mongo.closeConnection().then(() => this.application.close()));
     }
 
 }

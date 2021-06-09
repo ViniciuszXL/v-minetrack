@@ -3,7 +3,7 @@ import { Router } from '../../common/router/router';
 // API //
 import * as minecraftPinger from '../../common/api/minecraft.pinger';
 import { environment } from '../../common/environment';
-import { Authorization } from '../../common/mongo/authorization.model';
+import { Authorization } from '../../common/mongo/model/authorization.model';
 
 export abstract class PingRouterCommon extends Router {
 
@@ -11,7 +11,17 @@ export abstract class PingRouterCommon extends Router {
         // Parâmetros, token de autorização e classe do MinecraftPing //
         const { host } = req.params;
         const tokenAuth = req.header('Authorization');
-        const pinger = new minecraftPinger.MinecraftPing(host);
+
+        let hostname = host;
+        let port = 25565;
+
+        if (host.includes(':')) {
+            const split = host.split(':');
+            hostname = split[0];
+            port = split[1];
+        }
+
+        const pinger = new minecraftPinger.MinecraftPing(hostname, port);
 
         // Verificando se há um token de autorização //
         if (tokenAuth) {
@@ -33,6 +43,7 @@ export abstract class PingRouterCommon extends Router {
             
             // Ocorreu um erro na conexão //
             .catch(this.renderError(resp, next, 'Server not found', environment.CODE.NOT_FOUND));
+            return;
         }
 
         const key = `${ environment.REDIS.KEY.SERVER_PING_CACHE + this.formatHostname(host).toUpperCase() }`

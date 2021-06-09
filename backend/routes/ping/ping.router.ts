@@ -9,7 +9,6 @@ class PingRouter extends PingRouterCommon {
 
         // Ping //
         application.get('/api/minecraft/ping/:host', this.ping);
-
     }
 
 }
